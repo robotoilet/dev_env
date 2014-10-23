@@ -8,9 +8,13 @@ Installation
 * Get and install Virtualbox (https://www.virtualbox.org/) for you OS
 * Get and install Vagrant (https://www.vagrantup.com/) for your OS
 * Clone this repository
+
     $ git clone https://github.com/robotoilet/dev_env.git
+
 * Download, provision and run the vagrant box
+
     $ vagrant up
+
   This will take a while, as it has to 
     - download the ubuntu base image for the vagrant box
     - download and install docker on the machine
