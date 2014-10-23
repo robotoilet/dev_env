@@ -1,0 +1,16 @@
+{
+  "name": "distribution",
+  "version": "1.0.0",
+  "description": "A collection of services to distribute our sensor data.",
+  "dependencies": {
+    "request-json": "~0.4.13",
+    "underscore": "~1.7.0",
+    "winston": "^0.8.1"
+  },
+  "main": "distribute.js",
+  "scripts": {
+    "test": "mocha -w"
+  },
+  "author": "",
+  "license": "ISC"
+}
