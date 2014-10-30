@@ -33,9 +33,5 @@ project. There's a simple Dockerfile to set up a docker container with an
 influxdb instance on it. The exposed ports are forwarded to the host host
 (outside of the virtualbox box).
 ##### Usage
-Currently the database can be access directly via an http api (TODO: think
-about putting an mqtt broker inbetween) at port 8083.
-The following are just a few commands cut&paste from the influxdb docs
-* Create a new database
-curl -X POST 'http://<influxdb-url>:8086/db?u=root&p=root' \
-  -d '{"name": "NAME_OF_DATABASE"}'
+The database can be access directly via an http api at port 8086.
+For examples see integration-test/test/http_incoming.js
