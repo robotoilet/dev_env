@@ -1,2 +1,11 @@
 node_modules
 logs
+
+# vim swap files
+*.swp
+
+# logfiles
+*.log
+
+# local .vagrant dir
+.vagrant
