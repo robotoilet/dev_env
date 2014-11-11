@@ -5,8 +5,8 @@ node_modules
 *.swp
 
 # logfiles
-logs
 *.log
+logs
 
 # local .vagrant dir
 .vagrant
