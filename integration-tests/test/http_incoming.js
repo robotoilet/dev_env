@@ -63,8 +63,8 @@ describe('receive_sensorreading', function(){
           // make sure we can delete the db
           client.del("db/toiletX", function(err, res, body){
             res.should.have.property('statusCode', '204');
+            done();
           });
-          done();
         });
 
       });
