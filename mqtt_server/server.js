@@ -7,7 +7,7 @@ var _ = require('underscore');
 var config = {};  
 config.knownClients = {
   // client_toilet: password
-  'clientX_toiletX': 'clientX'
+  'clientX_toiletX': 'clientX' // test dummy
 }
 
 
