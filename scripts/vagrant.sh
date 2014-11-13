@@ -28,9 +28,17 @@ function buildInfluxDB() {
   docker build -t influxdb /vagrant/influxdb/
 }
 
+function buildMqttServer() {
+  cp -r /vagrant/distribution /vagrant/mqtt_server/
+  echo "building MQTT server"
+  docker build -t mqtt_server /vagrant/mqtt_server/
+  rm -r /vagrant/mqtt_server/distribution
+}
+
 apt-get update
 installGitRelated
 installSystemProgs
 buildInfluxDB
+buildMqttServer
 installNodeRelated
 source run_devenv.sh

@@ -22,6 +22,7 @@ describe('parse_dataString', function() {
     parseData(testString).should.eql([
       {
         name: 'SensorX',
+        columns: ['time', 'line'],
         points: [
           [1415707255749, 12],
           [1415707255759, 13],
@@ -30,12 +31,14 @@ describe('parse_dataString', function() {
       },
       {
         name: 'SensorY',
+        columns: ['time', 'line'],
         points: [
           [1415707255743, 23.356]
         ]
       },
       {
         name: 'SensorZ',
+        columns: ['time', 'line'],
         points: [
           [1415707255748, 400],
           [1415707255799, 600]

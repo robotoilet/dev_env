@@ -21,10 +21,10 @@ config.dataParsers = {
 };
 config.sensors = {
   sensorschmensor: {
-    dataType: parseInt
+    dataType: parseInt,
   },
   SensorY: {
-    dataType: parseFloat
+    dataType: parseFloat,
   }
 };
 
@@ -57,6 +57,7 @@ function parseData(dataString) {
   function buildObject(s) {
     var seriesName = s.match(reConf.seriesName)[0];
     var series = config.sensors[seriesName];
+    var columns = (series && series.columns) || ['time', 'line'];
     var dataType = (series && series.dataType) || parseInt;
     var dataPoints = s.match(reConf.dataPoints);
 
@@ -68,6 +69,7 @@ function parseData(dataString) {
 
     return {
       name: seriesName,
+      columns: columns,
       points: dataPoints
     };
   }
