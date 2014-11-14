@@ -1,6 +1,6 @@
-var mqtt = require('mqtt');
-var logger = require('./logger.js');
-var _ = require('underscore');
+var mqtt = require('mqtt')
+  , logger = require('./logger')
+  , _ = require('underscore');
 
 
 // TODO: move config to own node module
@@ -8,7 +8,7 @@ var config = {};
 config.knownClients = {
   // client_toilet: password
   'clientX_toiletX': 'clientX' // test dummy
-}
+};
 
 
 mqtt.createServer(function(client) {
@@ -36,7 +36,7 @@ mqtt.createServer(function(client) {
       id: client.id,
       username: client.username,
       password: client.password
-    }
+    };
     self.distribute(auth, packet.payload);
   });
 
