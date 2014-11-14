@@ -6,7 +6,6 @@ node_modules
 
 # logfiles
 *.log
-logs
 
 # local .vagrant dir
 .vagrant
