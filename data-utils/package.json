@@ -1,0 +1,20 @@
+{
+  "name": "data-utils",
+  "version": "0.1.0",
+  "description": "A collection of helper functions around data parsing and transformation",
+  "main": "index.js",
+  "dependencies": {
+    "underscore": "~1.7.0",
+    "winston": "^0.8.1"
+  },
+  "devDependencies": {
+    "mocha": "~2.0.1",
+    "should": "~4.1.0"
+  },
+  "scripts": {
+    "test-debug": "node-debug -p 8081 mocha",
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC"
+}
