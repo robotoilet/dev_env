@@ -3,13 +3,23 @@
 # re-usable functions to start up our dev env
 
 function runInfluxDB() {
-  echo "starting influxdb"
-  docker run -d -p 8083:8083 -p 8086:8086 influxdb
+  if docker ps -a | grep 'sensorDB'; then
+    echo "starting existing sensorDB container.."
+    docker start sensorDB
+  else
+    echo "running new influxdb instance as 'sensorDB'.."
+    docker run -d -p 8083:8083 -p 8086:8086 --name sensorDB influxdb
+  fi
 }
 
 function runMqttServer() {
-  echo "starting the MQTT server"
-  docker run -d -p 1883:1883 mqtt_server
+  if docker ps -a | grep 'mqttServer'; then
+    echo "starting existing mqttServer container.."
+    docker start mqttServer
+  else
+    echo "running new mqtt_server instance as 'mqttServer.."
+    docker run -d -p 1883:1883 --link sensorDB:sensorDB --name mqttServer mqtt_server
+  fi
 }
 
 function runIntegrationTests() {
@@ -26,7 +36,7 @@ function runIntegrationTests() {
   echo "(1. installing required node modules..)"
   npm install
   echo "(2. running the tests..)"
-  node_modules/.bin/mocha
+  npm test
 }
 
 runInfluxDB

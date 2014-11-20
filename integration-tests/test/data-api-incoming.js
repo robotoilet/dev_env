@@ -134,7 +134,7 @@ describe('incoming_mqtt', function() {
         http_client.setBasicAuth(FIX.punter.name, FIX.punter.password);
         res.should.have.property('statusCode', '200');
 
-        var mqtt_client = mqtt.createClient(1884, 'localhost', {
+        var mqtt_client = mqtt.createClient(1883, 'localhost', {
           clientId: FIX.site,
           username: FIX.punter.name,
           password: FIX.punter.password
