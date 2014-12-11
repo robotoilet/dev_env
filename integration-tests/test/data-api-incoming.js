@@ -1,7 +1,6 @@
 var should = require('should')
   , _ = require('underscore')
   , request = require('request-json')
-  , md5 = require('MD5')
   , utils = require('data-utils')
   , mqtt = require('mqtt');
 
@@ -31,13 +30,11 @@ var FIX = {
 
 FIX.sensorData = [FIX.sensorX, FIX.sensorY];
 FIX.sensorDataAsString = "" +
-  "SensorX " +
-  "(" + new Date(2007,8,9,10).valueOf() + " 12) " +
-  "(" + new Date(2007,8,9,11).valueOf() + " 11)\n" +
-  "SensorY " +
-  "(" + new Date(2007,8,9,10,12,13).valueOf() + " 100.1 3) " +
-  "(" + new Date(2007,8,9,11,12,14).valueOf() + " 1.12 4) " +
-  "(" + new Date(2007,8,9,11,12,15).valueOf() + " 122.1 6)\n";
+  "(a " + new Date(2007,8,9,10).valueOf() + " 12) " +
+  "(a " + new Date(2007,8,9,11).valueOf() + " 11) " +
+  "(b " + new Date(2007,8,9,10,12,13).valueOf() + " 100.1 3) " +
+  "(b " + new Date(2007,8,9,11,12,14).valueOf() + " 1.12 4) " +
+  "(b " + new Date(2007,8,9,11,12,15).valueOf() + " 122.1 6)";
 
 
 // Compare actual to expected data
@@ -140,19 +137,19 @@ describe('incoming_mqtt', function() {
           password: FIX.punter.password
         });
 
-        var md5sum = md5(FIX.sensorDataAsString);
+        var checksum = utils.checkchecksum(FIX.sensorDataAsString);
 
         // We know (rather assume here) that the last thing the server does is
         // to send out the verified Data message. Still, we check for the data
         // in the database at the very end.
         mqtt_client.on('message', function(toppic, message) {
           toppic.should.equal('verifiedData');
-          message.should.equal(md5sum);
+          message.should.equal(checksum);
           mqtt_client.end();
           queryDbForData(done);
         });
 
-        mqtt_client.publish(md5sum, FIX.sensorDataAsString);
+        mqtt_client.publish(checksum, FIX.sensorDataAsString);
       });
     });
   });
