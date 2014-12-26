@@ -2,6 +2,7 @@ var should = require('should')
   , _ = require('underscore')
   , request = require('request-json')
   , utils = require('data-utils')
+  , config = require('iol_conf')
   , mqtt = require('mqtt');
 
 
@@ -26,7 +27,7 @@ var FIX = {
       [new Date(2007,8,9,10,11,12,15).valueOf(), 122.1, 6]
     ]
   },
-  dbUrl: "db/toilets",
+  dbUrl: "db/" + config.dbName,
   site: 'siteX',
   punter: {name: 'punterX', password: 'punterX'}
 };
@@ -81,7 +82,7 @@ function queryDbForData(callback) {
 function deleteDatabase(callback){
   var http_client = request.newClient(FIX.httpTestApi);
   http_client.setBasicAuth(FIX.httpTestRoot, FIX.httpTestRootPwd);
-  http_client.del("db/toilets", function(err, res, body){
+  http_client.del(FIX.dbUrl, function(err, res, body){
     res.should.have.property('statusCode', '204');
     callback();
   });
@@ -96,7 +97,7 @@ describe('incoming_http', function() {
   http_client.setBasicAuth(FIX.httpTestRoot, FIX.httpTestRootPwd);
 
   it('should accept a http post and write the data', function(done) {
-    http_client.post("db", {"name": "toilets"}, function(err, res, b) {
+    http_client.post("db", {"name": config.dbName}, function(err, res, b) {
       if (err) deleteDatabase(function(){ throw err });
       res.should.have.property('statusCode', '201');
       var userUrl = FIX.dbUrl + "/users";
@@ -133,7 +134,7 @@ describe('incoming_mqtt', function() {
 
   it('should accept an mqtt publish by a known client and distribute the data', function(done) {
     // create a test database
-    http_client.post("db", {"name": "toilets"}, function(err, res, body){
+    http_client.post("db", {"name": config.dbName}, function(err, res, body){
       if (err) deleteDatabase(function(){ throw err });
       res.should.have.property('statusCode', '201');
       http_client.post(FIX.dbUrl + "/users", FIX.punter, function(e, res, b) {

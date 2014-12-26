@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "devDependencies": {
     "data-utils": "robotoilet/data-utils",
+    "iol_conf": "robotoilet/iol_conf",
     "mqtt": "~0.3.12",
     "winston": "^0.8.1",
     "mocha": "~2.0.1",
