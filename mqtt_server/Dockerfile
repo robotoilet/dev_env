@@ -24,6 +24,9 @@ RUN wget http://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64
 ADD run.sh ${RUN_SCRIPT_PATH}
 RUN chmod +x ${RUN_SCRIPT_PATH}
 
+# if there's a config.js file in this directory, add it as well to overwrite defaults
+ADD config.js ${MQTT_SERVER_DIR}/lib/config.js
+
 # expose the mqtt api
 EXPOSE 1883
 

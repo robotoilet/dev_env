@@ -9,3 +9,6 @@ node_modules
 
 # local .vagrant dir
 .vagrant
+
+# local overwrites for default config
+mqtt_server/config.js
