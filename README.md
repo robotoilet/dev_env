@@ -44,3 +44,4 @@ influxdb instance on it. The exposed ports are forwarded to the host host
 ##### Usage
 The database can be access directly via an http api at port 8086.
 For examples see integration-test/test/http_incoming.js
+If run locally there is a admin user inteface http://localhost:8083/
